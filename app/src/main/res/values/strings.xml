@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Listee</string>
     <string name="menu_home">Início</string>
+    <string name="menu_stock">Estoque</string>
     <string name="menu_inspirations">Inspirações</string>
     <string name="menu_configurations">Configurações</string>
 </resources>
