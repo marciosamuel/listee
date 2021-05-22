@@ -6,6 +6,11 @@
         android:icon="@drawable/ic_home"/>
 
     <item
+        android:id="@+id/menu_stock"
+        android:title="@string/menu_stock"
+        android:icon="@drawable/ic_stock"/>
+
+    <item
         android:id="@+id/menu_inspirations"
         android:title="@string/menu_inspirations"
         android:icon="@drawable/ic_inspirations"/>
