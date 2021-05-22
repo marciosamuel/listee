@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -36,8 +37,11 @@ public class MainActivity extends AppCompatActivity {
                             fragment = new InspirationsActivity();
                             break;
                     }
-
-                    getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).commit();
+                    if(fragment != null){
+                        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).commit();
+                    }else{
+                        Toast.makeText(MainActivity.this, "Em desenvolvimento", Toast.LENGTH_SHORT).show();
+                    }
 
                     return true;
                 }
