@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Listee</string>
+    <string name="menu_home">Início</string>
+    <string name="menu_stock">Estoque</string>
+    <string name="menu_inspirations">Inspirações</string>
+    <string name="menu_configurations">Configurações</string>
+    <string name="password">Senha</string>
+    <string name="email">Email</string>
+    <string name="user">Usuário</string>
+    <string name="register"><u>Cadastrar</u></string>
+    <string name="login"><u>Login</u></string>
 </resources>
