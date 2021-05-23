@@ -80,12 +80,14 @@
                 </ListView>
             </LinearLayout>
         </LinearLayout>
+
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Adicionar em minhas listas"
+            android:layout_marginBottom="15dp"
             android:backgroundTint="@color/pink"
-            android:layout_marginBottom="15dp"/>
+            android:text="Adicionar em minhas listas"
+            android:textColor="@color/white_100" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
