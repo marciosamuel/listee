@@ -16,10 +16,10 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        FloatingActionButton btnBack = findViewById(R.id.register_buttom_back);
+        Button btnToLogin = findViewById(R.id.button_to_login);
         Button btnRegister = findViewById(R.id.buttom_register);
 
-        btnBack.setOnClickListener(new View.OnClickListener() {
+        btnToLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
