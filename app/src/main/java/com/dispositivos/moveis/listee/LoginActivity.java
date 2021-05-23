@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -15,7 +16,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         Button btnToLogin = findViewById(R.id.button_login);
-        Button btnRegister = findViewById(R.id.button_to_register);
+        TextView linkToRegister = findViewById(R.id.link_to_register);
 
         btnToLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -24,7 +25,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        btnRegister.setOnClickListener(new View.OnClickListener() {
+        linkToRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
