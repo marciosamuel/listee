@@ -132,7 +132,7 @@
                 android:id="@+id/produto_texto_remover"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Remover da Lista"
+                android:text="Remover"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="@id/produto_botao_remover"
