@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif"
-        android:text="Login"
+        android:text="@string/login"
         android:textColor="@color/pink_100"
         android:textSize="40sp"
         android:textStyle="bold"
@@ -19,7 +19,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.202" />
+        app:layout_constraintVertical_bias="0.25" />
 
     <EditText
         android:id="@+id/login_email"
@@ -45,28 +45,27 @@
         app:layout_constraintTop_toBottomOf="@+id/login_email" />
 
     <Button
-        android:id="@+id/buttom_login"
+        android:id="@+id/button_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:backgroundTint="@color/pink_200"
-        android:text="Login"
+        android:text="@string/login"
         android:textColor="@color/white_100"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_password" />
 
-    <TextView
-        android:id="@+id/login_not_register"
+    <Button
+        android:id="@+id/button_to_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:linksClickable="true"
-        android:text="@string/not_register"
-        android:textColor="@color/pink_200"
-        android:textColorLink="@color/pink_200"
+        android:layout_marginEnd="8dp"
+        android:backgroundTint="@color/pink_100"
+        android:text="Cadastrar"
+        android:textColor="@color/white_100"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttom_login" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
