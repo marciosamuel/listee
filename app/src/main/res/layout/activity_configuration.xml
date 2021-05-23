@@ -54,6 +54,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="Deletar conta"
+            android:textColor="#E63946"
             android:textSize="16sp" />
     </LinearLayout>
 
