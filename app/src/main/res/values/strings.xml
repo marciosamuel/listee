@@ -7,6 +7,6 @@
     <string name="password">Senha</string>
     <string name="email">Email</string>
     <string name="user">Usuário</string>
-    <string name="register">Cadastrar</string>
-    <string name="login">Login</string>
+    <string name="register"><u>Cadastrar</u></string>
+    <string name="login"><u>Login</u></string>
 </resources>
