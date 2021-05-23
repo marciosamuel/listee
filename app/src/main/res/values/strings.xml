@@ -6,6 +6,7 @@
     <string name="menu_configurations">Configurações</string>
     <string name="password">Senha</string>
     <string name="email">Email</string>
-    <string name="name">Nome</string>
-    <string name="not_register"><u>Não tenho cadastro</u> </string>
+    <string name="user">Usuário</string>
+    <string name="register">Cadastrar</string>
+    <string name="login">Login</string>
 </resources>
