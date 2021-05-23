@@ -36,8 +36,12 @@ public class MainActivity extends AppCompatActivity {
                         case R.id.menu_inspirations:
                             fragment = new InspirationsActivity();
                             break;
+                        case R.id.menu_stock:
+                            fragment = new StockActivity();
+                            break;
                         case R.id.menu_configurations:
                             fragment = new ConfigurationActivity();
+                            break;
                     }
                     if(fragment != null){
                         getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).commit();
