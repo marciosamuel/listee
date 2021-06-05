@@ -15,17 +15,17 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        Button btnLogin = findViewById(R.id.buttom_login);
-        TextView linkCadastro = findViewById(R.id.login_not_register);
+        Button btnToLogin = findViewById(R.id.button_login);
+        TextView linkToRegister = findViewById(R.id.link_to_register);
 
-        btnLogin.setOnClickListener(new View.OnClickListener() {
+        btnToLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
             }
         });
 
-        linkCadastro.setOnClickListener(new View.OnClickListener() {
+        linkToRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
