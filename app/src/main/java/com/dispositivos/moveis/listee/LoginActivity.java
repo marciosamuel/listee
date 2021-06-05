@@ -12,21 +12,16 @@ import android.widget.TextView;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private EditText loginEmail;
-    private EditText loginPassword;
-    private Button btnLogin;
-    private TextView linkToRegister;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        loginEmail = findViewById(R.id.login_email);
-        loginPassword = findViewById(R.id.login_password);
+        EditText loginEmail = findViewById(R.id.login_email);
+        EditText loginPassword = findViewById(R.id.login_password);
 
-        btnLogin = findViewById(R.id.button_login);
-        linkToRegister = findViewById(R.id.link_to_register);
+        Button btnLogin = findViewById(R.id.button_login);
+        TextView linkToRegister = findViewById(R.id.link_to_register);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override

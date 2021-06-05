@@ -13,23 +13,17 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    private EditText registerUser;
-    private EditText registerEmail;
-    private EditText registerPassword;
-    private Button btnRegister;
-    private TextView linkToLogin;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        registerUser = findViewById(R.id.register_user);
-        registerEmail = findViewById(R.id.register_email);
-        registerPassword = findViewById(R.id.register_password);
+        EditText registerUser = findViewById(R.id.register_user);
+        EditText registerEmail = findViewById(R.id.register_email);
+        EditText registerPassword = findViewById(R.id.register_password);
 
-        linkToLogin = findViewById(R.id.link_to_login);
-        btnRegister = findViewById(R.id.buttom_register);
+        TextView linkToLogin = findViewById(R.id.link_to_login);
+        Button btnRegister = findViewById(R.id.buttom_register);
 
         linkToLogin.setOnClickListener(new View.OnClickListener() {
             @Override
