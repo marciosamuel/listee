@@ -22,7 +22,7 @@
         app:layout_constraintVertical_bias="0.25" />
 
     <EditText
-        android:id="@+id/register_name"
+        android:id="@+id/register_user"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -41,8 +41,8 @@
         android:ems="10"
         android:hint="@string/email"
         android:inputType="textEmailAddress"
-        app:layout_constraintStart_toStartOf="@+id/register_name"
-        app:layout_constraintTop_toBottomOf="@+id/register_name" />
+        app:layout_constraintStart_toStartOf="@+id/register_user"
+        app:layout_constraintTop_toBottomOf="@+id/register_user" />
 
     <EditText
         android:id="@+id/register_password"
