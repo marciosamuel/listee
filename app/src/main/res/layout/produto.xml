@@ -95,19 +95,20 @@
                 tools:text="@sample/produtos.json/produtos/unidade" />
 
             <ImageButton
+                android:id="@+id/produto_botao_aumentar"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:background="@color/white"
                 android:src="@drawable/ic_plus"
                 app:layout_constraintBottom_toBottomOf="@+id/produto_image"
-                app:layout_constraintEnd_toStartOf="@+id/imageButton"
+                app:layout_constraintEnd_toStartOf="@+id/produto_botao_diminuir"
                 app:layout_constraintHorizontal_bias="0.949"
                 app:layout_constraintStart_toEndOf="@+id/produto_image"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="1.0" />
 
             <ImageButton
-                android:id="@+id/imageButton"
+                android:id="@+id/produto_botao_diminuir"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:background="@color/white"
