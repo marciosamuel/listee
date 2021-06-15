@@ -17,21 +17,21 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp">
             <TextView
+                android:id="@+id/title_popup_inspirations"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Brunch de domingo"
                 android:textSize="20dp"
                 android:textAlignment="center"/>
             <TextView
+                android:id="@+id/subtitle_popup_inspirations"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Macarronada à italiana"
                 android:textSize="17dp"
                 android:textAlignment="center"/>
             <TextView
+                android:id="@+id/author_popup_inspirations"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Autor: dev_claudio"
                 android:textAlignment="center"
                 android:layout_marginBottom="10dp"/>
             <View
