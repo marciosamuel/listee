@@ -39,13 +39,6 @@ public class ConfigurationActivity extends Fragment {
             }
         });
 
-        btnEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                configurationUser.setText(editUser.getText());
-            }
-        });
-
         return view;
     }
 }
