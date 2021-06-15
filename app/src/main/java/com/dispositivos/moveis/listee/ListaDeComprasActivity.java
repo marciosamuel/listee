@@ -29,6 +29,9 @@ public class ListaDeComprasActivity extends AppCompatActivity {
 
         adapter = new ProdutoAdapter(this, produtos);
         listaDeProdutos.setAdapter(adapter);
+
+        Bundle data = getIntent().getExtras();
+        String idProduct = data.getString("ID_PRODUCT");
     }
 
     protected List<ProdutoModel> getProdutos(){
