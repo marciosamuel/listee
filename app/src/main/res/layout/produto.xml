@@ -22,20 +22,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ImageView
-                android:id="@+id/produto_image"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_margin="5dp"
-                android:scaleType="centerCrop"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0"
-                tools:src="@sample/produtos.json/produtos/image" />
-
             <TextView
                 android:id="@+id/produto_nome"
                 android:layout_width="wrap_content"
@@ -48,37 +34,37 @@
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@id/produto_image"
-                app:layout_constraintTop_toTopOf="@id/produto_image"
-                app:layout_constraintVertical_bias="0.0"
-                tools:text="@sample/produtos.json/produtos/name" />
+                app:layout_constraintHorizontal_bias="0.15"
+                app:layout_constraintVertical_bias="0.15"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/produto_botao_remover" />
+
+            <TextView
+                android:id="@+id/produto_texto_quantidade"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="Quantidade:"
+                android:textColor="@color/black_100"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="@+id/produto_nome"
+                app:layout_constraintTop_toBottomOf="@id/produto_nome"
+                app:layout_constraintBottom_toTopOf="@id/produto_botao_remover"
+                tools:layout_editor_absoluteY="73dp" />
 
             <TextView
                 android:id="@+id/produto_quantidade"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
-                android:textSize="16sp"
-                android:text="Quantidade:"
-                android:textColor="@color/black_100"
-                app:layout_constraintBottom_toBottomOf="@+id/produto_image"
-                app:layout_constraintStart_toStartOf="@+id/produto_nome" />
-
-            <TextView
-                android:id="@+id/produto_quantidade_valor"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="5dp"
                 android:textColor="@color/black"
                 android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="@+id/produto_image"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/produto_quantidade"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="1.0"
-                tools:text="@sample/produtos.json/produtos/quantidade" />
+                app:layout_constraintStart_toEndOf="@+id/produto_texto_quantidade"
+                app:layout_constraintTop_toTopOf="@id/produto_texto_quantidade"
+                />
 
             <TextView
                 android:id="@+id/produto_unidade"
@@ -87,12 +73,11 @@
                 android:padding="5dp"
                 android:textColor="@color/black"
                 android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="@+id/produto_image"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@id/produto_quantidade_valor"
-                app:layout_constraintTop_toTopOf="@id/produto_quantidade_valor"
-                tools:text="@sample/produtos.json/produtos/unidade" />
+                app:layout_constraintStart_toEndOf="@id/produto_quantidade"
+                app:layout_constraintTop_toTopOf="@id/produto_quantidade"
+                />
 
             <ImageButton
                 android:id="@+id/produto_botao_aumentar"
@@ -100,12 +85,9 @@
                 android:layout_height="40dp"
                 android:background="@color/white"
                 android:src="@drawable/ic_plus"
-                app:layout_constraintBottom_toBottomOf="@+id/produto_image"
                 app:layout_constraintEnd_toStartOf="@+id/produto_botao_diminuir"
-                app:layout_constraintHorizontal_bias="0.949"
-                app:layout_constraintStart_toEndOf="@+id/produto_image"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="1.0" />
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
             <ImageButton
                 android:id="@+id/produto_botao_diminuir"
@@ -113,21 +95,16 @@
                 android:layout_height="40dp"
                 android:background="@color/white"
                 android:src="@drawable/ic_minus"
-                app:layout_constraintBottom_toBottomOf="@id/produto_image"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.953"
-                app:layout_constraintStart_toEndOf="@+id/produto_image"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="1.0" />
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
             <ImageButton
                 android:id="@+id/produto_botao_remover"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:layout_marginTop="10dp"
                 android:background="@color/pink_200"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/produto_image" />
+                app:layout_constraintBottom_toBottomOf="parent" />
 
             <TextView
                 android:id="@+id/produto_texto_remover"

@@ -19,28 +19,33 @@ import android.widget.TextView;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import Adapters.ProdutoAdapter;
+import Models.ProdutoModel;
+
 public class StockActivity extends Fragment {
+    private static ProdutoAdapter adapter;
 
     @Nullable
     public View onCreateView(LayoutInflater layoutInflater,@NonNull ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = layoutInflater.inflate(R.layout.activity_stock, container, false);
 
-        ListView listaProdutos = view.findViewById(R.id.estoque_listView);
-        Button adicionarProduto = view.findViewById(R.id.estoque_Button);
+        List<ProdutoModel> produtos = getProdutos();
+        ListView listaDeProdutos = (ListView) view.findViewById(R.id.estoque_listView);
 
-        Produto produto = new Produto();
-
-        produto.setContainer(view.findViewById(R.id.produto_cardview));
-        produto.setNome(view.findViewById(R.id.produto_nome));
-        produto.setImagem(view.findViewById(R.id.produto_image));
-        produto.setQuantidade(view.findViewById(R.id.produto_quantidade_valor));
-        produto.setUnidade(view.findViewById(R.id.produto_unidade));
-        produto.setAumentarQuantidade(view.findViewById(R.id.produto_botao_aumentar));
-        produto.setDiminuirQuantidade(view.findViewById(R.id.produto_botao_diminuir));
-        produto.setRemoverProduto(view.findViewById(R.id.produto_botao_remover));
+        adapter = new ProdutoAdapter(this.getContext(), produtos);
+        listaDeProdutos.setAdapter(adapter);
 
         return view;
+    }
+
+    protected List<ProdutoModel> getProdutos(){
+        return new ArrayList<>(Arrays.asList(
+                new ProdutoModel( "feijão", "1 Kg", "1"),
+                new ProdutoModel( "arroz", "1 Kg", "2"),
+                new ProdutoModel( "macarrão", "1 Kg", "1")
+        ));
     }
 }

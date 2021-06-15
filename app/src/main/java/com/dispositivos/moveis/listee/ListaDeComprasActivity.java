@@ -10,28 +10,34 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import Adapters.ProdutoAdapter;
+import Models.ProdutoModel;
 
 public class ListaDeComprasActivity extends AppCompatActivity {
+    private static ProdutoAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_de_compras);
 
-        ImageView imagemTopo = findViewById(R.id.lista_compras_imageView);
-        TextView nomeLista = findViewById(R.id.lista_compras_textView);
-        ListView listaProdutos = findViewById(R.id.lista_compras_listView);
-        Button adicionarProduto = findViewById(R.id.lista_compras_Button);
+        List<ProdutoModel> produtos = getProdutos();
+        ListView listaDeProdutos = (ListView) findViewById(R.id.lista_compras_listView);
 
-        Produto produto = new Produto();
+        adapter = new ProdutoAdapter(this, produtos);
+        listaDeProdutos.setAdapter(adapter);
+    }
 
-        produto.setContainer(findViewById(R.id.produto_cardview));
-        produto.setNome(findViewById(R.id.produto_nome));
-        produto.setImagem(findViewById(R.id.produto_image));
-        produto.setQuantidade(findViewById(R.id.produto_quantidade_valor));
-        produto.setUnidade(findViewById(R.id.produto_unidade));
-        produto.setAumentarQuantidade(findViewById(R.id.produto_botao_aumentar));
-        produto.setDiminuirQuantidade(findViewById(R.id.produto_botao_diminuir));
-        produto.setRemoverProduto(findViewById(R.id.produto_botao_remover));
+    protected List<ProdutoModel> getProdutos(){
+        return new ArrayList<>(Arrays.asList(
+                new ProdutoModel( "feijão", "1 Kg", "5"),
+                new ProdutoModel( "arroz", "1 Kg", "4"),
+                new ProdutoModel( "macarrão", "1 Kg", "3"),
+                new ProdutoModel( "óleo", "1 L", "1"),
+                new ProdutoModel("margarina", "500g", "2")
+        ));
     }
 }
