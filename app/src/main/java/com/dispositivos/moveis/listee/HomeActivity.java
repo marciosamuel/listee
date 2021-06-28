@@ -13,10 +13,19 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
 import Adapters.HomeCardAdapter;
 import Models.HomeCardModel;
 
 public class HomeActivity extends Fragment {
+
+    private CollectionReference lists = FirebaseFirestore.getInstance().collection("lists");
 
     @Nullable
     public View onCreateView(LayoutInflater layoutInflater,@NonNull ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -27,9 +36,16 @@ public class HomeActivity extends Fragment {
 
         HomeCardAdapter homeCardAdapter = new HomeCardAdapter(view.getContext());
         listView.setAdapter(homeCardAdapter);
-
-        homeCardAdapter.add(new HomeCardModel("Compras do Mês", "Itens selecionados: 10", "Itens restantes: 10"));
-        homeCardAdapter.add(new HomeCardModel("Churrasco do fim de semana", "Itens selecionados: 15", "Itens restantes: 2"));
+        lists.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful()){
+                    for(QueryDocumentSnapshot document : task.getResult()){
+                        homeCardAdapter.add(new HomeCardModel((String) document.get("title"), (String) document.get("selectedItems"), (String) document.get("remainingItems")));
+                    }
+                }
+            }
+        });
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
