@@ -82,7 +82,7 @@ public class RegisterActivity extends AppCompatActivity {
                         if(task.isSuccessful()) {
                             Log.d("Login", "createUserWithEmail:success");
                             FirebaseUser userId = mAuth.getCurrentUser();
-                            users.add(new UserModel(userId.getUid(), user, email));
+                            users.document(userId.getUid()).set(new UserModel(user, email));
                             startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
                         } else {
                             Toast.makeText(RegisterActivity.this, "Falha na autenticação", Toast.LENGTH_SHORT).show();
