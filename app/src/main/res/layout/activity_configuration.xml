@@ -12,7 +12,6 @@
         android:id="@+id/configuration_user"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="dev_mateus"
         android:textColor="@color/white_100"
         android:textSize="24sp"
         android:textStyle="bold"
