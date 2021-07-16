@@ -25,7 +25,6 @@ public class MainActivity extends AppCompatActivity {
 
     private CollectionReference inspirations = FirebaseFirestore.getInstance().collection("inspirations");
     private CollectionReference inspirationList = FirebaseFirestore.getInstance().collection("inspiration_list");
-    private CollectionReference lists = FirebaseFirestore.getInstance().collection("lists");
     private FirebaseAuth mAuth;
 
     @Override
@@ -42,23 +41,22 @@ public class MainActivity extends AppCompatActivity {
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(bottomNavigationListener);
-        lists.add(new HomeCardModel("Compas do mês", "Itens selecionados: 10", "Itens restantes: 10"));
-        inspirations.add(new InspirationCardModel("Brunch de domingo", "Macarronada italiana", "dev_claudio")).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-            @Override
-            public void onSuccess(DocumentReference documentReference) {
-                inspirationList.add(new InspirationListModel(documentReference.getId(), "Macarrão espaguete", 1));
-                inspirationList.add(new InspirationListModel(documentReference.getId(), "Molho de tomate", 1));
-                inspirationList.add(new InspirationListModel(documentReference.getId(), "Queijo Parmesão ralado", 1));
-            }
-        });
-        inspirations.add(new InspirationCardModel("Feira pré-pandemia", "Itens para sobrevivência", "dev_claudio")).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-            @Override
-            public void onSuccess(DocumentReference documentReference) {
-                inspirationList.add(new InspirationListModel(documentReference.getId(), "Papel Higiênico", 3));
-                inspirationList.add(new InspirationListModel(documentReference.getId(), "Pasta de dente", 3));
-                inspirationList.add(new InspirationListModel(documentReference.getId(), "Sabão", 3));
-            }
-        });
+//        inspirations.add(new InspirationCardModel("Brunch de domingo", "Macarronada italiana", "dev_claudio")).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+//            @Override
+//            public void onSuccess(DocumentReference documentReference) {
+//                inspirationList.add(new InspirationListModel(documentReference.getId(), "Macarrão espaguete", 1));
+//                inspirationList.add(new InspirationListModel(documentReference.getId(), "Molho de tomate", 1));
+//                inspirationList.add(new InspirationListModel(documentReference.getId(), "Queijo Parmesão ralado", 1));
+//            }
+//        });
+//        inspirations.add(new InspirationCardModel("Feira pré-pandemia", "Itens para sobrevivência", "dev_claudio")).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+//            @Override
+//            public void onSuccess(DocumentReference documentReference) {
+//                inspirationList.add(new InspirationListModel(documentReference.getId(), "Papel Higiênico", 3));
+//                inspirationList.add(new InspirationListModel(documentReference.getId(), "Pasta de dente", 3));
+//                inspirationList.add(new InspirationListModel(documentReference.getId(), "Sabão", 3));
+//            }
+//        });
 
         getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new HomeActivity()).commit();
     }
