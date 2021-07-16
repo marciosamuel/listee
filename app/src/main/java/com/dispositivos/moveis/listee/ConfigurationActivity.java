@@ -47,7 +47,9 @@ public class ConfigurationActivity extends Fragment {
     public View onCreateView(LayoutInflater layoutInflater, @NonNull ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = layoutInflater.inflate(R.layout.activity_configuration, container, false);
 
-        FirebaseUser userAuth = FirebaseAuth.getInstance().getCurrentUser();
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser userAuth = mAuth.getCurrentUser();
+
         users = FirebaseFirestore.getInstance().collection("users");
         DocumentReference user = users.document(userAuth.getUid());
 
