@@ -41,7 +41,9 @@ public class HomeActivity extends Fragment {
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()){
                     for(QueryDocumentSnapshot document : task.getResult()){
-                        homeCardAdapter.add(new HomeCardModel((String) document.get("title"), (String) document.get("selectedItems"), (String) document.get("remainingItems")));
+                        HomeCardModel homeCardModel = new HomeCardModel((String) document.get("user_id"), (String) document.get("title"), (String) document.get("subTitle"), (String) document.get("selectedItems"), (String) document.get("remainingItems"));
+                        homeCardModel.setId(document.getId());
+                        homeCardAdapter.add(homeCardModel);
                     }
                 }
             }
@@ -51,8 +53,16 @@ public class HomeActivity extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent i = new Intent(view.getContext(), ListaDeComprasActivity.class);
-                i.putExtra("ID_PRODUCT", "01");
+                i.putExtra("LIST_ID", homeCardAdapter.getItem(position).getId());
                 startActivity(i);
+            }
+        });
+
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(view.getContext(), NewListActivity.class);
+                startActivity(intent);
             }
         });
 
