@@ -1,5 +1,7 @@
 package com.dispositivos.moveis.listee;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -82,12 +84,14 @@ public class InspirationsActivity extends Fragment {
                 ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, android.R.id.text1, contentItens.get(position));
                 listView.setAdapter(arrayAdapter);
 
+                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
+
                 Button buttonAddToList = popupInspiration.findViewById(R.id.add_to_list);
 
                 buttonAddToList.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        lists.add(new HomeCardModel(inspirationCardAdapter.getItem(position).getTitle(), "Itens selecionados: 0", "Itens restantes: 10"));
+                        lists.add(new HomeCardModel(sharedPreferences.getString("id", ""), inspirationCardAdapter.getItem(position).getTitle(), inspirationCardAdapter.getItem(position).getSubTitle(),"Itens selecionados: 0", "Itens restantes: 10"));
                         Toast.makeText(view.getContext(), "Item adicionado a sua lista com sucesso.", Toast.LENGTH_SHORT).show();
                     }
                 });
