@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -25,10 +26,11 @@ public class NewListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_list);
 
-        Button buttonAdd = findViewById(R.id.button_add);
-        Button buttonCancel = findViewById(R.id.button_cancel);
-        EditText inputTitle = findViewById(R.id.input_title);
-        EditText inputSubtitle = findViewById(R.id.input_subtitle);
+        Button buttonAdd = findViewById(R.id.new_list_btn_save);
+        Button buttonCancel = findViewById(R.id.new_list_btn_cancel);
+        EditText inputTitle = findViewById(R.id.new_list_nome_input);
+        EditText inputDescription = findViewById(R.id.new_list_description_input);
+        CheckBox addToInspiration = findViewById(R.id.new_list_inspiration_checkbox);
 
         SharedPreferences sharedPreferences = getSharedPreferences("user", Context.MODE_PRIVATE);
 
@@ -36,7 +38,7 @@ public class NewListActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try{
-                    lists.add(new HomeCardModel(sharedPreferences.getString("id", ""), inputTitle.getText().toString(), inputSubtitle.getText().toString(),"Itens selecionados: 0", "Itens restantes: 0"));
+                    lists.add(new HomeCardModel(sharedPreferences.getString("id", ""), inputTitle.getText().toString(), inputDescription.getText().toString(),"Itens selecionados: 0", "Itens restantes: 0"));
                     Toast.makeText(NewListActivity.this, "Lista cadastrada", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(NewListActivity.this, MainActivity.class);
                     startActivity(intent);
