@@ -43,9 +43,11 @@ public class StockActivity extends Fragment {
 
     protected List<ProdutoModel> getProdutos(){
         return new ArrayList<>(Arrays.asList(
-                new ProdutoModel( "feijão", "1 Kg", "1"),
-                new ProdutoModel( "arroz", "1 Kg", "2"),
-                new ProdutoModel( "macarrão", "1 Kg", "1")
+                new ProdutoModel( "feijão", "Kg", 5, 2),
+                new ProdutoModel( "arroz", "g", 4, 500),
+                new ProdutoModel( "macarrão", "Kg", 3, 1),
+                new ProdutoModel( "óleo", "ml", 3, 500),
+                new ProdutoModel("margarina", "g", 2, 500)
         ));
     }
 }

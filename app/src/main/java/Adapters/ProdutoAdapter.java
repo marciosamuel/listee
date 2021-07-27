@@ -21,13 +21,11 @@ public class ProdutoAdapter extends ArrayAdapter<ProdutoModel> {
 
     public static class ViewHolder{
         TextView nome;
-        TextView unidade;
-        TextView quantidade;
+        TextView quantidadeTotal;
 
         public ViewHolder(View view){
-            nome = (TextView) view.findViewById(R.id.produto_nome);
-            unidade = (TextView) view.findViewById(R.id.produto_unidade);
-            quantidade = (TextView) view.findViewById(R.id.produto_quantidade);
+            nome = (TextView) view.findViewById(R.id.product_name);
+            quantidadeTotal = (TextView) view.findViewById(R.id.product_quantity);
         }
     }
 
@@ -69,8 +67,7 @@ public class ProdutoAdapter extends ArrayAdapter<ProdutoModel> {
 
         ProdutoModel produto = getItem(position);
         holder.nome.setText(produto.getNome());
-        holder.unidade.setText(produto.getUnidade());
-        holder.quantidade.setText(produto.getQuantidade());
+        holder.quantidadeTotal.setText(produto.getTotalString());
 
         return convertView;
     }

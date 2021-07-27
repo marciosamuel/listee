@@ -25,7 +25,7 @@ public class ListaDeComprasActivity extends AppCompatActivity {
         setContentView(R.layout.activity_lista_de_compras);
 
         List<ProdutoModel> produtos = getProdutos();
-        ListView listaDeProdutos = (ListView) findViewById(R.id.lista_compras_listView);
+        ListView listaDeProdutos = (ListView) findViewById(R.id.sale_list_products);
 
         adapter = new ProdutoAdapter(this, produtos);
         listaDeProdutos.setAdapter(adapter);
@@ -36,11 +36,11 @@ public class ListaDeComprasActivity extends AppCompatActivity {
 
     protected List<ProdutoModel> getProdutos(){
         return new ArrayList<>(Arrays.asList(
-                new ProdutoModel( "feijão", "1 Kg", "5"),
-                new ProdutoModel( "arroz", "1 Kg", "4"),
-                new ProdutoModel( "macarrão", "1 Kg", "3"),
-                new ProdutoModel( "óleo", "1 L", "1"),
-                new ProdutoModel("margarina", "500g", "2")
+                new ProdutoModel( "feijão", "Kg", 5, 2),
+                new ProdutoModel( "arroz", "g", 4, 500),
+                new ProdutoModel( "macarrão", "Kg", 3, 1),
+                new ProdutoModel( "óleo", "ml", 3, 500),
+                new ProdutoModel("margarina", "g", 2, 500)
         ));
     }
 }
