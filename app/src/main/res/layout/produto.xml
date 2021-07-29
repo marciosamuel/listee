@@ -49,12 +49,11 @@
                 android:id="@+id/product_quantity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingBottom="10dp"
                 android:layout_marginLeft="5dp"
-                android:text="5kg"
+                android:paddingBottom="10dp"
+                android:text="5"
                 android:textColor="@color/black"
                 android:textSize="16sp"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@id/product_quantity_info"
                 app:layout_constraintTop_toTopOf="@id/product_quantity_info" />
 
