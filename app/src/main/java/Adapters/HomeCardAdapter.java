@@ -36,21 +36,18 @@ public class HomeCardAdapter extends ArrayAdapter<HomeCardModel> {
 
         HomeCardModel homeCardModel = getItem(position);
         holder.title_card.setText(homeCardModel.getTitle());
-        holder.selectedItems.setText(homeCardModel.getSelectedItems());
-        holder.remainingItems.setText(homeCardModel.getRemainingItems());
+        holder.quantity.setText(homeCardModel.getQuantity());
 
         return convertView;
     }
 
     public static class ViewHolder{
         TextView title_card;
-        TextView selectedItems;
-        TextView remainingItems;
+        TextView quantity;
 
         public ViewHolder(View view){
             title_card = (TextView) view.findViewById(R.id.title_card);
-            selectedItems = (TextView) view.findViewById(R.id.selected_items);
-            remainingItems = (TextView) view.findViewById(R.id.remaining_items);
+            quantity = (TextView) view.findViewById(R.id.quantity);
         }
     }
 }
