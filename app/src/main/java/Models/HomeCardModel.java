@@ -35,6 +35,6 @@ public class HomeCardModel {
     }
 
     public String getQuantity() {
-        return String.format("%d", quantity);
+        return String.format("%d", (quantity == null ? 0 : quantity));
     }
 }
