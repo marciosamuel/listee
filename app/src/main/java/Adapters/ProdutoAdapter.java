@@ -5,11 +5,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 
 import com.dispositivos.moveis.listee.R;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.util.List;
 
@@ -21,11 +25,13 @@ public class ProdutoAdapter extends ArrayAdapter<ProdutoModel> {
 
     public static class ViewHolder{
         TextView nome;
-        TextView quantidadeTotal;
+        TextView quantidade;
+        CardView cardProduct;
 
         public ViewHolder(View view){
+            cardProduct = (CardView) view.findViewById(R.id.produto_cardview);
             nome = (TextView) view.findViewById(R.id.product_name);
-            quantidadeTotal = (TextView) view.findViewById(R.id.product_quantity);
+            quantidade = (TextView) view.findViewById(R.id.product_quantity);
         }
     }
 
@@ -67,7 +73,22 @@ public class ProdutoAdapter extends ArrayAdapter<ProdutoModel> {
 
         ProdutoModel produto = getItem(position);
         holder.nome.setText(produto.getNome());
-        holder.quantidadeTotal.setText(produto.getTotalString());
+        holder.quantidade.setText(produto.getQuantidade());
+
+        holder.cardProduct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(getContext(), R.style.popupInspirationTheme);
+                View popupEditProduct = LayoutInflater.from(getContext()).inflate(R.layout.activity_popup_edit_product, v.findViewById(R.id.popup_edit_product_container));
+
+                EditText newProductName = v.findViewById(R.id.edit_product_name);
+                EditText newProductQuantity = v.findViewById(R.id.edit_product_quantity);
+                Button addProduct = v.findViewById(R.id.btn_edit_product);
+
+                bottomSheetDialog.setContentView(popupEditProduct);
+                bottomSheetDialog.show();
+            }
+        });
 
         return convertView;
     }
