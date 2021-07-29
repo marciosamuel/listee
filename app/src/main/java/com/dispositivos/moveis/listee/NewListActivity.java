@@ -16,6 +16,7 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import Models.HomeCardModel;
+import Models.ListModel;
 
 public class NewListActivity extends AppCompatActivity {
 
@@ -32,20 +33,29 @@ public class NewListActivity extends AppCompatActivity {
         EditText inputDescription = findViewById(R.id.new_list_description_input);
         CheckBox addToInspiration = findViewById(R.id.new_list_inspiration_checkbox);
 
+        addToInspiration.setVisibility(View.INVISIBLE);
+
         SharedPreferences sharedPreferences = getSharedPreferences("user", Context.MODE_PRIVATE);
 
         buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try{
-                    lists.add(new HomeCardModel(sharedPreferences.getString("id", ""), inputTitle.getText().toString(), inputDescription.getText().toString(),"Itens selecionados: 0", "Itens restantes: 0"));
-                    Toast.makeText(NewListActivity.this, "Lista cadastrada", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(NewListActivity.this, MainActivity.class);
-                    startActivity(intent);
-                    finish();
-                }catch(Exception exception){
-                    Toast.makeText(NewListActivity.this, "Não foi possível salvar a lista", Toast.LENGTH_SHORT).show();
+                if (inputTitle.getText().toString().length() <= 3) {
+                    Toast.makeText(NewListActivity.this, "O nome da lista precisa ter mais que 3 caracteres", Toast.LENGTH_SHORT).show();
+                } else if (inputDescription.getText().toString().length() == 0) {
+                    Toast.makeText(NewListActivity.this, "Você precisa adicionar uma descrição", Toast.LENGTH_SHORT).show();
+                } else {
+                    try {
+                        lists.add(new ListModel(sharedPreferences.getString("id", ""), inputTitle.getText().toString(), inputDescription.getText().toString(), 0));
+                        Toast.makeText(NewListActivity.this, "Lista cadastrada", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(NewListActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                    } catch (Exception exception) {
+                        Toast.makeText(NewListActivity.this, "Não foi possível salvar a lista", Toast.LENGTH_SHORT).show();
+                    }
                 }
+
             }
         });
 
