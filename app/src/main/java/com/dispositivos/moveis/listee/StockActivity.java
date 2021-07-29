@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -34,20 +35,36 @@ public class StockActivity extends Fragment {
 
         List<ProdutoModel> produtos = getProdutos();
         ListView listaDeProdutos = (ListView) view.findViewById(R.id.estoque_listView);
+        Button btnAddProduct = view.findViewById(R.id.estoque_Button);
 
         adapter = new ProdutoAdapter(this.getContext(), produtos);
         listaDeProdutos.setAdapter(adapter);
+
+        btnAddProduct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(getActivity(), R.style.popupInspirationTheme);
+                View popupAddProduct = LayoutInflater.from(getActivity()).inflate(R.layout.activity_popup_new_product, view.findViewById(R.id.popup_new_product_container));
+
+                EditText newProductName = popupAddProduct.findViewById(R.id.new_product_name);
+                EditText newProductQuantity = popupAddProduct.findViewById(R.id.new_product_quantity);
+                Button addProduct = popupAddProduct.findViewById(R.id.btn_new_product);
+
+                bottomSheetDialog.setContentView(popupAddProduct);
+                bottomSheetDialog.show();
+            }
+        });
 
         return view;
     }
 
     protected List<ProdutoModel> getProdutos(){
         return new ArrayList<>(Arrays.asList(
-                new ProdutoModel( "feijão", "Kg", 5, 2),
-                new ProdutoModel( "arroz", "g", 4, 500),
-                new ProdutoModel( "macarrão", "Kg", 3, 1),
-                new ProdutoModel( "óleo", "ml", 3, 500),
-                new ProdutoModel("margarina", "g", 2, 500)
+                new ProdutoModel( "feijão", 5),
+                new ProdutoModel( "arroz", 4),
+                new ProdutoModel( "macarrão", 3),
+                new ProdutoModel( "óleo", 3),
+                new ProdutoModel("margarina", 2)
         ));
     }
 }
