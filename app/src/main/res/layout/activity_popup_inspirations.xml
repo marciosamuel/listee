@@ -57,28 +57,6 @@
 
                 </ListView>
             </LinearLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="@color/white_100"
-                />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Você já tem:"
-                android:textSize="17dp"
-                android:layout_marginTop="10dp"
-                android:textAlignment="inherit"/>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <ListView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                </ListView>
-            </LinearLayout>
         </LinearLayout>
 
         <Button

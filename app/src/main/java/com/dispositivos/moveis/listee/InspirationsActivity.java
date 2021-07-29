@@ -28,6 +28,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -57,7 +59,7 @@ public class InspirationsActivity extends Fragment {
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()){
                     for(QueryDocumentSnapshot document : task.getResult()){
-                        inspirationCardAdapter.add(new InspirationCardModel((String) document.get("title"), (String) document.get("subTitle"), (String) document.get("author")));
+                        inspirationCardAdapter.add(new InspirationCardModel((String) document.getId(), (String) document.get("title"), (String) document.get("subTitle"), (String) document.get("author")));
                         List<String> itens = new ArrayList<>();
                         inspirationList.whereEqualTo("inspirationCardId", document.getId()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                             @Override
@@ -91,8 +93,19 @@ public class InspirationsActivity extends Fragment {
                 buttonAddToList.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        lists.add(new HomeCardModel(sharedPreferences.getString("id", ""), inspirationCardAdapter.getItem(position).getTitle(), inspirationCardAdapter.getItem(position).getSubTitle(),"Itens selecionados: 0", "Itens restantes: 10"));
-                        Toast.makeText(view.getContext(), "Item adicionado a sua lista com sucesso.", Toast.LENGTH_SHORT).show();
+                        inspirationList.whereEqualTo("inspirationCardId", inspirationCardAdapter.getItem(position).getId()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
+                                int count = 0;
+                                if(task.isSuccessful()){
+                                    for(QueryDocumentSnapshot documentList : task.getResult()){
+                                        count++;
+                                    }
+                                }
+                                lists.add(new HomeCardModel(sharedPreferences.getString("id", ""), inspirationCardAdapter.getItem(position).getTitle(), inspirationCardAdapter.getItem(position).getSubTitle(),count));
+                                Toast.makeText(view.getContext(), "Item adicionado a sua lista com sucesso.", Toast.LENGTH_SHORT).show();
+                            }
+                        });
                     }
                 });
 
@@ -101,7 +114,7 @@ public class InspirationsActivity extends Fragment {
                 TextView subtitlePopupInspirations = popupInspiration.findViewById(R.id.subtitle_popup_inspirations);
                 subtitlePopupInspirations.setText(inspirationCardAdapter.getItem(position).getSubTitle());
                 TextView authorPopupInspirations = popupInspiration.findViewById(R.id.author_popup_inspirations);
-                authorPopupInspirations.setText("Author: "+inspirationCardAdapter.getItem(position).getAuthor());
+                authorPopupInspirations.setText("Autor: "+inspirationCardAdapter.getItem(position).getAuthor());
 
                 bottomSheetDialog.setContentView(popupInspiration);
                 bottomSheetDialog.show();
