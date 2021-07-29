@@ -13,15 +13,13 @@ public class HomeCardModel {
     private String user_id;
     private String title;
     private String subTitle;
-    private String selectedItems;
-    private String remainingItems;
+    private Integer quantity;
 
-    public HomeCardModel(String user_id, String title, String subTitle, String selectedItems, String remainingItems){
+    public HomeCardModel(String user_id, String title, String subTitle, Integer quantity){
         this.user_id = user_id;
         this.title = title;
         this.subTitle = subTitle;
-        this.selectedItems = selectedItems;
-        this.remainingItems = remainingItems;
+        this.quantity = quantity;
     }
 
     public void setId(String id) {
@@ -36,11 +34,7 @@ public class HomeCardModel {
         return title;
     }
 
-    public String getSelectedItems() {
-        return selectedItems;
-    }
-
-    public String getRemainingItems() {
-        return remainingItems;
+    public String getQuantity() {
+        return String.format("%d", quantity);
     }
 }

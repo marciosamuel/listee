@@ -1,14 +1,20 @@
 package Models;
 
 public class InspirationCardModel {
+    private String id;
     private String title;
     private String subTitle;
     private String author;
 
-    public InspirationCardModel(String title, String subTitle, String author) {
+    public InspirationCardModel(String id, String title, String subTitle, String author) {
+        this.id = id;
         this.title = title;
         this.subTitle = subTitle;
         this.author = author;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public String getTitle() {

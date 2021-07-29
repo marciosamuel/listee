@@ -70,7 +70,7 @@
         android:hint="Lista de exemplo"
         android:inputType="textMultiLine"
         android:layout_width="0dp"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:textSize="20sp"
         android:paddingHorizontal="10sp"
         app:layout_constraintTop_toBottomOf="@id/new_list_description_info"

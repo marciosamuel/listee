@@ -3,11 +3,14 @@ package com.dispositivos.moveis.listee;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -22,7 +25,10 @@ import Adapters.ProductListAdapter;
 import Models.ProdutoModel;
 
 public class ListaDeComprasActivity extends AppCompatActivity {
-    private static ProductListAdapter adapter;
+
+    String nome = "Lista de teste";
+    String descricao = "Lista feita apenas para testar o funcionamento e verificar se está tudo certo";
+    boolean isInspiration = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +39,13 @@ public class ListaDeComprasActivity extends AppCompatActivity {
         ListView listaDeProdutos = (ListView) findViewById(R.id.sale_list_products);
         Button btnAddProduct = findViewById(R.id.sale_list_btn_add_product);
 
-        adapter = new ProductListAdapter(this, produtos);
+        TextView name = findViewById(R.id.sale_list_header_text);
+        name.setText(nome);
+        TextView description = findViewById(R.id.sale_list_description);
+        description.setText(descricao);
+
+        ProdutoAdapter adapter = new ProdutoAdapter(this, produtos);
+      
         listaDeProdutos.setAdapter(adapter);
 
         Bundle data = getIntent().getExtras();
@@ -51,6 +63,18 @@ public class ListaDeComprasActivity extends AppCompatActivity {
 
                 bottomSheetDialog.setContentView(popupAddProduct);
                 bottomSheetDialog.show();
+
+        Context context = this;
+
+        ImageButton editBtn = findViewById(R.id.sale_list_btn_edit);
+        editBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(context, EditListActivity.class);
+                i.putExtra("LIST_NAME", nome);
+                i.putExtra("LIST_DESCRIPTION", descricao);
+                i.putExtra("LIST_INSPIRATION", isInspiration);
+                startActivity(i);
             }
         });
     }

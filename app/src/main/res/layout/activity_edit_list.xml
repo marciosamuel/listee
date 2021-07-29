@@ -67,7 +67,7 @@
     <EditText
         android:id="@+id/edit_list_description_input"
         android:layout_width="0dp"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:layout_marginHorizontal="35dp"
         android:hint="Lista de exemplo"
         android:inputType="textMultiLine"
