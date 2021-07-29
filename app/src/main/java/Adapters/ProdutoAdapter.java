@@ -81,9 +81,9 @@ public class ProdutoAdapter extends ArrayAdapter<ProdutoModel> {
                 BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(getContext(), R.style.popupInspirationTheme);
                 View popupEditProduct = LayoutInflater.from(getContext()).inflate(R.layout.activity_popup_edit_product, v.findViewById(R.id.popup_edit_product_container));
 
-                EditText newProductName = v.findViewById(R.id.edit_product_name);
-                EditText newProductQuantity = v.findViewById(R.id.edit_product_quantity);
-                Button addProduct = v.findViewById(R.id.btn_edit_product);
+                EditText newProductName = popupEditProduct.findViewById(R.id.edit_product_name);
+                EditText newProductQuantity = popupEditProduct.findViewById(R.id.edit_product_quantity);
+                Button addProduct = popupEditProduct.findViewById(R.id.btn_edit_product);
 
                 bottomSheetDialog.setContentView(popupEditProduct);
                 bottomSheetDialog.show();
