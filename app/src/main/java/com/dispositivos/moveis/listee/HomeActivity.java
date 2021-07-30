@@ -46,7 +46,8 @@ public class HomeActivity extends Fragment {
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()){
                     for(QueryDocumentSnapshot document : task.getResult()){
-                        HomeCardModel homeCardModel = new HomeCardModel((String) document.get("user_id"), (String) document.get("title"), (String) document.get("subTitle"), (Integer) document.get("quantity"));
+                        int quantity = document.get("quantity") != null ? Integer.parseInt(document.get("quantity").toString()) : 0;
+                        HomeCardModel homeCardModel = new HomeCardModel((String) document.get("user_id"), (String) document.get("title"), (String) document.get("subTitle"), quantity);
                         homeCardModel.setId(document.getId());
                         homeCardAdapter.add(homeCardModel);
                     }
