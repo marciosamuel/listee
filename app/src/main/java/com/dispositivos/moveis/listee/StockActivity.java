@@ -30,6 +30,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -59,7 +61,7 @@ public class StockActivity extends Fragment {
         ListView listaDeProdutos = (ListView) view.findViewById(R.id.estoque_listView);
         Button btnAddProduct = view.findViewById(R.id.estoque_Button);
 
-        adapter = new ProdutoAdapter(this.getContext(), produtos);
+        adapter = new ProdutoAdapter(view.getContext(), produtos);
         listaDeProdutos.setAdapter(adapter);
 
         btnAddProduct.setOnClickListener(new View.OnClickListener() {
@@ -118,9 +120,19 @@ public class StockActivity extends Fragment {
     }
 
     protected List<ProdutoModel> getProdutos(){
-        return new ArrayList<>(Arrays.asList(
-                new ProdutoModel( "123", "feijão", 5),
-                new ProdutoModel( "123", "arroz", 4)
-        ));
+        ArrayList<ProdutoModel> products = new ArrayList<>();
+
+        stock.whereEqualTo("userId", userId.getUid()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for(QueryDocumentSnapshot documentList : task.getResult()){
+                        ProdutoModel product = new ProdutoModel((String) documentList.get("userId"), (String) documentList.get("nome"), Integer.parseInt(documentList.get("quantidade").toString()));
+                        products.add(product);
+                    }
+                }
+            }
+        });
+        return products;
     }
 }
