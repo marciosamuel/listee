@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -30,35 +31,24 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_splash_screen);
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                setContentView(R.layout.activity_main);
+                mAuth = FirebaseAuth.getInstance();
+                FirebaseUser user = mAuth.getCurrentUser();
+                if(user == null) {
+                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                    finish();
+                }
 
-        mAuth = FirebaseAuth.getInstance();
-        FirebaseUser user = mAuth.getCurrentUser();
-        if(user == null) {
-            startActivity(new Intent(MainActivity.this, LoginActivity.class));
-            finish();
-        }
-
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setOnNavigationItemSelectedListener(bottomNavigationListener);
-//        inspirations.add(new InspirationCardModel("Brunch de domingo", "Macarronada italiana", "dev_claudio")).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-//            @Override
-//            public void onSuccess(DocumentReference documentReference) {
-//                inspirationList.add(new InspirationListModel(documentReference.getId(), "Macarrão espaguete", 1));
-//                inspirationList.add(new InspirationListModel(documentReference.getId(), "Molho de tomate", 1));
-//                inspirationList.add(new InspirationListModel(documentReference.getId(), "Queijo Parmesão ralado", 1));
-//            }
-//        });
-//        inspirations.add(new InspirationCardModel("Feira pré-pandemia", "Itens para sobrevivência", "dev_claudio")).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-//            @Override
-//            public void onSuccess(DocumentReference documentReference) {
-//                inspirationList.add(new InspirationListModel(documentReference.getId(), "Papel Higiênico", 3));
-//                inspirationList.add(new InspirationListModel(documentReference.getId(), "Pasta de dente", 3));
-//                inspirationList.add(new InspirationListModel(documentReference.getId(), "Sabão", 3));
-//            }
-//        });
-
-        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new HomeActivity()).commit();
+                BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+                bottomNavigationView.setOnNavigationItemSelectedListener(bottomNavigationListener);
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new HomeActivity()).commit();
+            }
+        }, 2000);
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener bottomNavigationListener =
@@ -84,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
                     if(fragment != null){
                         getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).commit();
                     }else{
-                        Toast.makeText(MainActivity.this, "Em desenvolvimento", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "Opção invalida", Toast.LENGTH_SHORT).show();
                     }
 
                     return true;
