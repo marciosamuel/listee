@@ -49,6 +49,7 @@ public class StockActivity extends Fragment {
     private CollectionReference stock = FirebaseFirestore.getInstance().collection("stock");
     private FirebaseAuth mAuth;
     private FirebaseUser userId;
+    private ListView listProducts;
 
     @Nullable
     public View onCreateView(LayoutInflater layoutInflater,@NonNull ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -57,12 +58,10 @@ public class StockActivity extends Fragment {
         mAuth = FirebaseAuth.getInstance();
         userId = mAuth.getCurrentUser();
 
-        List<ProdutoModel> produtos = getProdutos();
-        ListView listaDeProdutos = (ListView) view.findViewById(R.id.estoque_listView);
+        listProducts = (ListView) view.findViewById(R.id.estoque_listView);
         Button btnAddProduct = view.findViewById(R.id.estoque_Button);
 
-        adapter = new ProdutoAdapter(view.getContext(), produtos);
-        listaDeProdutos.setAdapter(adapter);
+        getProducts(view);
 
         btnAddProduct.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,7 +82,7 @@ public class StockActivity extends Fragment {
                                 Log.d("newProduct: ", "quantidade");
                                 if (Integer.parseInt(newProductQuantity.getText().toString()) > 0) {
                                     Log.d("newProduct: ", "quantidade");
-                                    createProduct(newProductName.getText().toString(), Integer.parseInt(newProductQuantity.getText().toString()));
+                                    createProduct(view, newProductName.getText().toString(), Integer.parseInt(newProductQuantity.getText().toString()));
                                     bottomSheetDialog.cancel();
                                 } else {
                                     Toast.makeText(getContext(), "Quantidade menor que 1", Toast.LENGTH_SHORT).show();
@@ -105,34 +104,35 @@ public class StockActivity extends Fragment {
         return view;
     }
 
-    private void createProduct(final String name, int quantity) {
+    private void getProducts(View view) {
+        stock.whereEqualTo("userId", userId.getUid()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull @NotNull Task<QuerySnapshot> taskList) {
+                if (taskList.isSuccessful()) {
+                    ArrayList<ProdutoModel> products = new ArrayList<>();
+                    for(QueryDocumentSnapshot documentList : taskList.getResult()){
+                        ProdutoModel product = new ProdutoModel((String) documentList.get("userId"), (String) documentList.get("nome"), Integer.parseInt(documentList.get("quantidade").toString()));
+                        products.add(product);
+                    }
+                    adapter = new ProdutoAdapter(view.getContext(), products);
+                    listProducts.setAdapter(adapter);
+                }
+            }
+        });
+    }
+
+    private void createProduct(View view, final String name, int quantity) {
         ProdutoModel product = new ProdutoModel(userId.getUid(), name, quantity);
         stock.add(product).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
             @Override
             public void onComplete(@NonNull @NotNull Task<DocumentReference> task) {
                 if(task.isSuccessful()) {
                     Toast.makeText(getContext(), "Produto adicionado com sucesso", Toast.LENGTH_SHORT).show();
+                    getProducts(view);
                 } else {
                     Toast.makeText(getContext(), "Falha ao adicionar produto", Toast.LENGTH_SHORT).show();
                 }
             }
         });
-    }
-
-    protected List<ProdutoModel> getProdutos(){
-        ArrayList<ProdutoModel> products = new ArrayList<>();
-
-        stock.whereEqualTo("userId", userId.getUid()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    for(QueryDocumentSnapshot documentList : task.getResult()){
-                        ProdutoModel product = new ProdutoModel((String) documentList.get("userId"), (String) documentList.get("nome"), Integer.parseInt(documentList.get("quantidade").toString()));
-                        products.add(product);
-                    }
-                }
-            }
-        });
-        return products;
     }
 }
