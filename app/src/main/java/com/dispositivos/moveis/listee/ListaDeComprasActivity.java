@@ -44,7 +44,7 @@ public class ListaDeComprasActivity extends AppCompatActivity {
         TextView description = findViewById(R.id.sale_list_description);
         description.setText(descricao);
 
-        ProdutoAdapter adapter = new ProdutoAdapter(this, produtos);
+        ProductListAdapter adapter = new ProductListAdapter(this, produtos);
       
         listaDeProdutos.setAdapter(adapter);
 
@@ -63,6 +63,8 @@ public class ListaDeComprasActivity extends AppCompatActivity {
 
                 bottomSheetDialog.setContentView(popupAddProduct);
                 bottomSheetDialog.show();
+            }
+        });
 
         Context context = this;
 
@@ -81,11 +83,9 @@ public class ListaDeComprasActivity extends AppCompatActivity {
 
     protected List<ProdutoModel> getProdutos(){
         return new ArrayList<>(Arrays.asList(
-                new ProdutoModel( "feijão", 5),
-                new ProdutoModel( "arroz", 4),
-                new ProdutoModel( "macarrão", 3),
-                new ProdutoModel( "óleo", 3),
-                new ProdutoModel("margarina", 2)
+                new ProdutoModel( "123", "feijão", 5),
+                new ProdutoModel( "123", "macarrão", 3),
+                new ProdutoModel("123", "margarina", 2)
         ));
     }
 }
