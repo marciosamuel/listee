@@ -8,7 +8,7 @@
 
     </item>
     <item
-        android:height="150dp">
+        android:height="125dp">
         <shape xmlns:android="http://schemas.android.com/apk/res/android"
             android:shape="rectangle">
             <gradient
