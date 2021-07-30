@@ -1,6 +1,8 @@
 package com.dispositivos.moveis.listee;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,12 +38,16 @@ public class HomeActivity extends Fragment {
 
         HomeCardAdapter homeCardAdapter = new HomeCardAdapter(view.getContext());
         listView.setAdapter(homeCardAdapter);
-        lists.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
+
+        lists.whereEqualTo("user_id", sharedPreferences.getString("id", "")).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()){
                     for(QueryDocumentSnapshot document : task.getResult()){
-                        HomeCardModel homeCardModel = new HomeCardModel((String) document.get("user_id"), (String) document.get("title"), (String) document.get("subTitle"), (Integer) document.get("quantity"));
+                        int quantity = document.get("quantity") != null ? Integer.parseInt(document.get("quantity").toString()) : 0;
+                        HomeCardModel homeCardModel = new HomeCardModel((String) document.get("user_id"), (String) document.get("title"), (String) document.get("subTitle"), quantity);
                         homeCardModel.setId(document.getId());
                         homeCardAdapter.add(homeCardModel);
                     }
