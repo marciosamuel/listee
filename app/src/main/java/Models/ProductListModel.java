@@ -40,4 +40,8 @@ public class ProductListModel {
     public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
     }
+
+    public void setChecked(Boolean checked) {
+        this.checked = checked;
+    }
 }
