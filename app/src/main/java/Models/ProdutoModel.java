@@ -1,12 +1,14 @@
 package Models;
 
 public class ProdutoModel {
+    private String id;
     private String userId;
     private String nome;
     private int quantidade;
 
 
-    public ProdutoModel(String userId, String nome, int quantidade) {
+    public ProdutoModel(String id, String userId, String nome, int quantidade) {
+        this.id = id;
         this.userId = userId;
         this.nome = nome;
         this.quantidade = quantidade;
@@ -23,6 +25,8 @@ public class ProdutoModel {
     public String getUserId() {
         return userId;
     }
+
+    public String getId() { return id; }
 
     public void setNome(String nome) {
         this.nome = nome;
