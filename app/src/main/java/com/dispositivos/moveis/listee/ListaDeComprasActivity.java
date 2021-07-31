@@ -83,9 +83,9 @@ public class ListaDeComprasActivity extends AppCompatActivity {
 
     protected List<ProdutoModel> getProdutos(){
         return new ArrayList<>(Arrays.asList(
-                new ProdutoModel( "123", "feijão", 5),
-                new ProdutoModel( "123", "macarrão", 3),
-                new ProdutoModel("123", "margarina", 2)
+                new ProdutoModel( "1", "123",  "feijão", 5),
+                new ProdutoModel( "2", "123", "macarrão", 3),
+                new ProdutoModel("3", "123", "margarina", 2)
         ));
     }
 }
