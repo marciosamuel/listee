@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -38,6 +39,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 import Adapters.ProdutoAdapter;
 import Models.ProdutoModel;
@@ -101,6 +103,69 @@ public class StockActivity extends Fragment {
             }
         });
 
+        listProducts.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ProdutoModel product = adapter.getItem(position);
+                BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(getActivity(), R.style.popupInspirationTheme);
+                View popupEditProduct = LayoutInflater.from(getContext()).inflate(R.layout.activity_popup_edit_product, view.findViewById(R.id.popup_edit_product_container));
+
+                EditText editProductName = popupEditProduct.findViewById(R.id.edit_product_name);
+                EditText editProductQuantity = popupEditProduct.findViewById(R.id.edit_product_quantity);
+                Button editProduct = popupEditProduct.findViewById(R.id.btn_edit_product);
+                Button deleteProduct = popupEditProduct.findViewById(R.id.btn_delete_product);
+
+                editProductName.setText(product.getNome());
+                editProductQuantity.setText(product.getQuantidade());
+
+                editProduct.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(!editProductName.getText().toString().equals("")){
+                            Log.d("editProduct: ", "name");
+                            if (!TextUtils.isEmpty(editProductQuantity.getText().toString())) {
+                                Log.d("editProduct: ", "quantidade");
+                                if (Integer.parseInt(editProductQuantity.getText().toString()) > 0) {
+                                    Log.d("editProduct: ", "quantidade");
+                                    product.setNome(editProductName.getText().toString());
+                                    product.setQuantidade(Integer.parseInt(editProductQuantity.getText().toString()));
+                                    editProduct(view, product);
+                                    bottomSheetDialog.cancel();
+                                } else {
+                                    Toast.makeText(getContext(), "Quantidade menor que 1", Toast.LENGTH_SHORT).show();
+                                }
+                            } else {
+                                Toast.makeText(getContext(), "Quantidade vazia", Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            Toast.makeText(getContext(), "Nome vazio", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+                deleteProduct.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        stock.document(product.getId()).delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull @NotNull Task<Void> task) {
+                                if(task.isSuccessful()) {
+                                    Toast.makeText(getContext(), "Produto removido com sucesso", Toast.LENGTH_SHORT).show();
+                                    getProducts(view);
+                                } else {
+                                    Toast.makeText(getContext(), "Falha ao remover produto", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+                        bottomSheetDialog.cancel();
+                    }
+                });
+
+                bottomSheetDialog.setContentView(popupEditProduct);
+                bottomSheetDialog.show();
+            }
+        });
+
         return view;
     }
 
@@ -111,7 +176,7 @@ public class StockActivity extends Fragment {
                 if (taskList.isSuccessful()) {
                     ArrayList<ProdutoModel> products = new ArrayList<>();
                     for(QueryDocumentSnapshot documentList : taskList.getResult()){
-                        ProdutoModel product = new ProdutoModel((String) documentList.get("userId"), (String) documentList.get("nome"), Integer.parseInt(documentList.get("quantidade").toString()));
+                        ProdutoModel product = new ProdutoModel((String) documentList.get("id"), (String) documentList.get("userId"), (String) documentList.get("nome"), Integer.parseInt(documentList.get("quantidade").toString()));
                         products.add(product);
                     }
                     adapter = new ProdutoAdapter(view.getContext(), products);
@@ -122,15 +187,29 @@ public class StockActivity extends Fragment {
     }
 
     private void createProduct(View view, final String name, int quantity) {
-        ProdutoModel product = new ProdutoModel(userId.getUid(), name, quantity);
-        stock.add(product).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+        ProdutoModel product = new ProdutoModel(UUID.randomUUID().toString(), userId.getUid(), name, quantity);
+        stock.document(product.getId()).set(product).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
-            public void onComplete(@NonNull @NotNull Task<DocumentReference> task) {
+            public void onComplete(@NonNull @NotNull Task<Void> task) {
                 if(task.isSuccessful()) {
                     Toast.makeText(getContext(), "Produto adicionado com sucesso", Toast.LENGTH_SHORT).show();
                     getProducts(view);
                 } else {
                     Toast.makeText(getContext(), "Falha ao adicionar produto", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+    private void editProduct(View view, ProdutoModel produto) {
+        stock.document(produto.getId()).set(produto).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull @NotNull Task<Void> task) {
+                if(task.isSuccessful()) {
+                    Toast.makeText(getContext(), "Produto editado com sucesso", Toast.LENGTH_SHORT).show();
+                    getProducts(view);
+                } else {
+                    Toast.makeText(getContext(), "Falha ao editar produto", Toast.LENGTH_SHORT).show();
                 }
             }
         });
