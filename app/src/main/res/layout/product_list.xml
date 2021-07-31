@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/produto_cardview"
+        android:id="@+id/produto_list_cardview"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
@@ -22,7 +22,7 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/product_name"
+                android:id="@+id/product_list_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="35dp"
@@ -42,11 +42,11 @@
                 android:text="Quantidade:"
                 android:textColor="@color/black_100"
                 android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="@id/product_name"
-                app:layout_constraintTop_toBottomOf="@id/product_name" />
+                app:layout_constraintStart_toStartOf="@id/product_list_name"
+                app:layout_constraintTop_toBottomOf="@id/product_list_name" />
 
             <TextView
-                android:id="@+id/product_quantity"
+                android:id="@+id/product_list_quantity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
@@ -64,6 +64,7 @@
                 android:layout_marginEnd="8dp"
                 android:buttonTint="@color/pink"
                 android:checked="false"
+                android:focusable="false"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
