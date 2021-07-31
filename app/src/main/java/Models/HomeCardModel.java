@@ -15,7 +15,8 @@ public class HomeCardModel {
     private String subTitle;
     private Integer quantity;
 
-    public HomeCardModel(String user_id, String title, String subTitle, Integer quantity){
+    public HomeCardModel(String id, String user_id, String title, String subTitle, Integer quantity){
+        this.id = id;
         this.user_id = user_id;
         this.title = title;
         this.subTitle = subTitle;
