@@ -32,15 +32,12 @@ import Models.ProdutoModel;
 public class ProdutoAdapter extends ArrayAdapter<ProdutoModel> {
 
     private final List<ProdutoModel> produtos;
-    private CollectionReference stock = FirebaseFirestore.getInstance().collection("stock");
 
     public static class ViewHolder{
         TextView nome;
         TextView quantidade;
-        CardView cardProduct;
 
         public ViewHolder(View view){
-            cardProduct = (CardView) view.findViewById(R.id.produto_cardview);
             nome = (TextView) view.findViewById(R.id.product_name);
             quantidade = (TextView) view.findViewById(R.id.product_quantity);
         }
