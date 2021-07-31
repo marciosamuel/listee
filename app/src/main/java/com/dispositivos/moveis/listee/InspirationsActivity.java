@@ -105,7 +105,7 @@ public class InspirationsActivity extends Fragment {
                                     for(QueryDocumentSnapshot documentList : task.getResult()){
                                         count++;
                                         String uuid_product = UUID.randomUUID().toString();
-                                        productsList.add(new ProductListModel(uuid_product, uuid, documentList.get("nameProduct").toString(), Integer.parseInt(documentList.get("quantity").toString()), false));
+                                        productsList.document(uuid_product).set(new ProductListModel(uuid_product, uuid, documentList.get("nameProduct").toString(), Integer.parseInt(documentList.get("quantity").toString()), false));
                                     }
                                 }
                                 lists.document(uuid).set(new HomeCardModel(uuid, sharedPreferences.getString("id", ""), inspirationCardAdapter.getItem(position).getTitle(), inspirationCardAdapter.getItem(position).getSubTitle(),count)).addOnCompleteListener(new OnCompleteListener<Void>() {
