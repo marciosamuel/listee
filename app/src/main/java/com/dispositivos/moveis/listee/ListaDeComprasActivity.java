@@ -1,5 +1,6 @@
 package com.dispositivos.moveis.listee;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
@@ -15,7 +16,15 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,10 +34,9 @@ import Adapters.ProductListAdapter;
 import Models.ProdutoModel;
 
 public class ListaDeComprasActivity extends AppCompatActivity {
-
-    String nome = "Lista de teste";
-    String descricao = "Lista feita apenas para testar o funcionamento e verificar se está tudo certo";
     boolean isInspiration = true;
+
+    private CollectionReference lists = FirebaseFirestore.getInstance().collection("lists");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,16 +48,24 @@ public class ListaDeComprasActivity extends AppCompatActivity {
         Button btnAddProduct = findViewById(R.id.sale_list_btn_add_product);
 
         TextView name = findViewById(R.id.sale_list_header_text);
-        name.setText(nome);
         TextView description = findViewById(R.id.sale_list_description);
-        description.setText(descricao);
 
         ProductListAdapter adapter = new ProductListAdapter(this, produtos);
       
         listaDeProdutos.setAdapter(adapter);
 
         Bundle data = getIntent().getExtras();
-        String idProduct = data.getString("ID_PRODUCT");
+        String listId = data.getString("LIST_ID");
+
+        lists.document(listId).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull @NotNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()){
+                    name.setText(task.getResult().get("title").toString());
+                    description.setText(task.getResult().get("subTitle").toString());
+                }
+            }
+        });
 
         btnAddProduct.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,8 +89,8 @@ public class ListaDeComprasActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(context, EditListActivity.class);
-                i.putExtra("LIST_NAME", nome);
-                i.putExtra("LIST_DESCRIPTION", descricao);
+                i.putExtra("LIST_NAME", name.getText());
+                i.putExtra("LIST_DESCRIPTION", description.getText());
                 i.putExtra("LIST_INSPIRATION", isInspiration);
                 startActivity(i);
             }
