@@ -18,13 +18,14 @@ import com.dispositivos.moveis.listee.ListaDeComprasActivity;
 import com.dispositivos.moveis.listee.R;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import Models.ProdutoModel;
+import Models.ProductListModel;
 
-public class ProductListAdapter extends ArrayAdapter<ProdutoModel> {
+public class ProductListAdapter extends ArrayAdapter<ProductListModel> {
 
-    private final List<ProdutoModel> produtos;
+    private final List<ProductListModel> produtos;
 
     public static class ViewHolder{
         TextView nome;
@@ -40,7 +41,7 @@ public class ProductListAdapter extends ArrayAdapter<ProdutoModel> {
         }
     }
 
-    public ProductListAdapter(Context context, List<ProdutoModel> produtos){
+    public ProductListAdapter(Context context, List<ProductListModel> produtos){
         super(context, R.layout.activity_lista_de_compras);
         this.produtos = produtos;
     }
@@ -51,7 +52,7 @@ public class ProductListAdapter extends ArrayAdapter<ProdutoModel> {
     }
 
     @Override
-    public ProdutoModel getItem(int position) {
+    public ProductListModel getItem(int position) {
         return produtos.get(position);
     }
 
@@ -76,9 +77,10 @@ public class ProductListAdapter extends ArrayAdapter<ProdutoModel> {
             holder = (ProductListAdapter.ViewHolder) convertView.getTag();
         }
 
-        ProdutoModel produto = getItem(position);
+        ProductListModel produto = getItem(position);
         holder.nome.setText(produto.getNome());
         holder.quantidade.setText(produto.getQuantidade());
+        holder.checkboxProduct.setChecked(produto.getChecked());
 
         holder.checkboxProduct.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,21 +90,6 @@ public class ProductListAdapter extends ArrayAdapter<ProdutoModel> {
                 } else {
                     holder.nome.setTextColor(Color.parseColor("#FF5789"));
                 }
-            }
-        });
-
-        holder.cardProduct.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(getContext(), R.style.popupInspirationTheme);
-                View popupEditProduct = LayoutInflater.from(getContext()).inflate(R.layout.activity_popup_edit_product, v.findViewById(R.id.popup_edit_product_container));
-
-                EditText newProductName = popupEditProduct.findViewById(R.id.edit_product_name);
-                EditText newProductQuantity = popupEditProduct.findViewById(R.id.edit_product_quantity);
-                Button addProduct = popupEditProduct.findViewById(R.id.btn_edit_product);
-
-                bottomSheetDialog.setContentView(popupEditProduct);
-                bottomSheetDialog.show();
             }
         });
 
