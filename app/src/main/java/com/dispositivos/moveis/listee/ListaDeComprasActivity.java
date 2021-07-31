@@ -38,6 +38,7 @@ import java.util.UUID;
 
 import Adapters.ProductListAdapter;
 import Adapters.ProdutoAdapter;
+import Models.HomeCardModel;
 import Models.ProductListModel;
 import Models.ProdutoModel;
 
@@ -163,6 +164,14 @@ public class ListaDeComprasActivity extends AppCompatActivity {
                                 if(task.isSuccessful()) {
                                     Toast.makeText(ListaDeComprasActivity.this, "Produto removido com sucesso", Toast.LENGTH_SHORT).show();
                                     getProducts(listId);
+                                    lists.document(listId).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                        @Override
+                                        public void onComplete(@NonNull @NotNull Task<DocumentSnapshot> task) {
+                                            if(task.isSuccessful()){
+                                                lists.document(listId).set(new HomeCardModel(task.getResult().get("id").toString(), task.getResult().get("user_id").toString(), task.getResult().get("title").toString(), task.getResult().get("subTitle").toString(), (Integer.parseInt(task.getResult().get("quantity").toString()) - 1)));
+                                            }
+                                        }
+                                    });
                                 } else {
                                     Toast.makeText(ListaDeComprasActivity.this, "Falha ao remover produto", Toast.LENGTH_SHORT).show();
                                 }
@@ -217,6 +226,14 @@ public class ListaDeComprasActivity extends AppCompatActivity {
                 if(task.isSuccessful()) {
                     Toast.makeText(ListaDeComprasActivity.this, "Produto adicionado com sucesso", Toast.LENGTH_SHORT).show();
                     getProducts(listId);
+                    lists.document(listId).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull @NotNull Task<DocumentSnapshot> task) {
+                            if(task.isSuccessful()){
+                                lists.document(listId).set(new HomeCardModel(task.getResult().get("id").toString(), task.getResult().get("user_id").toString(), task.getResult().get("title").toString(), task.getResult().get("subTitle").toString(), (Integer.parseInt(task.getResult().get("quantity").toString()) + 1)));
+                            }
+                        }
+                    });
                 } else {
                     Toast.makeText(ListaDeComprasActivity.this, "Falha ao adicionar produto", Toast.LENGTH_SHORT).show();
                 }
