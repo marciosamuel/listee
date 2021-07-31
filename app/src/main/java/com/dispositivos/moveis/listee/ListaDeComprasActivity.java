@@ -168,7 +168,8 @@ public class ListaDeComprasActivity extends AppCompatActivity {
                                         @Override
                                         public void onComplete(@NonNull @NotNull Task<DocumentSnapshot> task) {
                                             if(task.isSuccessful()){
-                                                lists.document(listId).set(new HomeCardModel(task.getResult().get("id").toString(), task.getResult().get("user_id").toString(), task.getResult().get("title").toString(), task.getResult().get("subTitle").toString(), (Integer.parseInt(task.getResult().get("quantity").toString()) - 1)));
+                                                int quantity = task.getResult().get("quantity") != null ? Integer.parseInt(task.getResult().get("quantity").toString()) : 0;
+                                                lists.document(listId).set(new HomeCardModel((String) task.getResult().get("id"), (String) task.getResult().get("user_id"), (String) task.getResult().get("title"), (String) task.getResult().get("subTitle"), (quantity - 1)));
                                             }
                                         }
                                     });
@@ -230,7 +231,8 @@ public class ListaDeComprasActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull @NotNull Task<DocumentSnapshot> task) {
                             if(task.isSuccessful()){
-                                lists.document(listId).set(new HomeCardModel(task.getResult().get("id").toString(), task.getResult().get("user_id").toString(), task.getResult().get("title").toString(), task.getResult().get("subTitle").toString(), (Integer.parseInt(task.getResult().get("quantity").toString()) + 1)));
+                                int quantity = task.getResult().get("quantity") != null ? Integer.parseInt(task.getResult().get("quantity").toString()) : 0;
+                                lists.document(listId).set(new HomeCardModel((String) task.getResult().get("id"), (String) task.getResult().get("user_id"), (String) task.getResult().get("title"), (String) task.getResult().get("subTitle"), (quantity + 1)));
                             }
                         }
                     });
