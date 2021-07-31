@@ -17,6 +17,8 @@ import androidx.cardview.widget.CardView;
 import com.dispositivos.moveis.listee.ListaDeComprasActivity;
 import com.dispositivos.moveis.listee.R;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +28,7 @@ import Models.ProductListModel;
 public class ProductListAdapter extends ArrayAdapter<ProductListModel> {
 
     private final List<ProductListModel> produtos;
+    private CollectionReference products_list = FirebaseFirestore.getInstance().collection("products_list");
 
     public static class ViewHolder{
         TextView nome;
@@ -34,9 +37,9 @@ public class ProductListAdapter extends ArrayAdapter<ProductListModel> {
         CardView cardProduct;
 
         public ViewHolder(View view){
-            cardProduct = (CardView) view.findViewById(R.id.produto_cardview);
-            nome = (TextView) view.findViewById(R.id.product_name);
-            quantidade = (TextView) view.findViewById(R.id.product_quantity);
+            cardProduct = (CardView) view.findViewById(R.id.produto_list_cardview);
+            nome = (TextView) view.findViewById(R.id.product_list_name);
+            quantidade = (TextView) view.findViewById(R.id.product_list_quantity);
             checkboxProduct = (CheckBox) view.findViewById(R.id.checkbox_product);
         }
     }
@@ -82,14 +85,23 @@ public class ProductListAdapter extends ArrayAdapter<ProductListModel> {
         holder.quantidade.setText(produto.getQuantidade());
         holder.checkboxProduct.setChecked(produto.getChecked());
 
+        if (produto.getChecked()) {
+            holder.nome.setTextColor(Color.parseColor("#C3C3C3"));
+        } else {
+            holder.nome.setTextColor(Color.parseColor("#FF5789"));
+        }
+
         holder.checkboxProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(holder.checkboxProduct.isChecked()) {
                     holder.nome.setTextColor(Color.parseColor("#C3C3C3"));
+                    produto.setChecked(true);
                 } else {
                     holder.nome.setTextColor(Color.parseColor("#FF5789"));
+                    produto.setChecked(false);
                 }
+                products_list.document(produto.getId()).set(produto);
             }
         });
 
