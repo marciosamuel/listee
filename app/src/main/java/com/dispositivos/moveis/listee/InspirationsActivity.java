@@ -34,15 +34,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import Adapters.InspirationCardAdapter;
 import Models.HomeCardModel;
 import Models.InspirationCardModel;
+import Models.ProductListModel;
 
 public class InspirationsActivity extends Fragment {
     private CollectionReference inspirations = FirebaseFirestore.getInstance().collection("inspirations");
     private CollectionReference inspirationList = FirebaseFirestore.getInstance().collection("inspiration_list");
     private CollectionReference lists = FirebaseFirestore.getInstance().collection("lists");
+    private CollectionReference productsList = FirebaseFirestore.getInstance().collection("products_list");
 
     @Nullable
     public View onCreateView(LayoutInflater layoutInflater,@NonNull ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -97,13 +100,24 @@ public class InspirationsActivity extends Fragment {
                             @Override
                             public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
                                 int count = 0;
+                                String uuid = UUID.randomUUID().toString();
                                 if(task.isSuccessful()){
                                     for(QueryDocumentSnapshot documentList : task.getResult()){
                                         count++;
+                                        String uuid_product = UUID.randomUUID().toString();
+                                        productsList.add(new ProductListModel(uuid_product, uuid, documentList.get("nameProduct").toString(), Integer.parseInt(documentList.get("quantity").toString()), false));
                                     }
                                 }
-                                lists.add(new HomeCardModel(sharedPreferences.getString("id", ""), inspirationCardAdapter.getItem(position).getTitle(), inspirationCardAdapter.getItem(position).getSubTitle(),count));
-                                Toast.makeText(view.getContext(), "Item adicionado a sua lista com sucesso.", Toast.LENGTH_SHORT).show();
+                                lists.document(uuid).set(new HomeCardModel(uuid, sharedPreferences.getString("id", ""), inspirationCardAdapter.getItem(position).getTitle(), inspirationCardAdapter.getItem(position).getSubTitle(),count)).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull @NotNull Task<Void> task) {
+                                        if(task.isSuccessful()){
+                                            Toast.makeText(view.getContext(), "Item adicionado a sua lista com sucesso.", Toast.LENGTH_SHORT).show();
+                                        }else{
+                                            Toast.makeText(view.getContext(), "Não foi possível adicionar a lista.", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                });
                             }
                         });
                     }
