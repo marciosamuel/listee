@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/popup_inspiration_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/popup_inspirations">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginHorizontal="10dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp">
+            <TextView
+                android:id="@+id/title_popup_inspirations"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:textAlignment="center"/>
+            <TextView
+                android:id="@+id/subtitle_popup_inspirations"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="17dp"
+                android:textAlignment="center"/>
+            <TextView
+                android:id="@+id/author_popup_inspirations"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:layout_marginBottom="10dp"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/white_100"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Itens necessários:"
+                android:textSize="20dp"
+                android:layout_marginTop="10dp"
+                android:textAlignment="inherit"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <ListView
+                    android:id="@+id/list_view_itens"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </ListView>
+            </LinearLayout>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/add_to_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:backgroundTint="@color/pink"
+            android:text="Adicionar em minhas listas"
+            android:textColor="@color/white_100" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

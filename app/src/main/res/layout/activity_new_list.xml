@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".NewListActivity">
+
+    <ImageView
+        android:id="@+id/new_list_header"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@color/pink" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="Adicionar nova lista"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/new_list_nome_info"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:text="Título"
+        android:textSize="24sp"
+        android:textColor="@color/pink"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/new_list_header"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginHorizontal="45dp"
+        android:layout_marginTop="35dp"/>
+
+    <EditText
+        android:id="@+id/new_list_nome_input"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:hint="Nome da lista"
+        android:textSize="20sp"
+        android:paddingHorizontal="10sp"
+        app:layout_constraintTop_toBottomOf="@id/new_list_nome_info"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginHorizontal="35dp"
+        />
+
+    <TextView
+        android:id="@+id/new_list_description_info"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:text="Descrição"
+        android:textSize="24sp"
+        android:textColor="@color/pink"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/new_list_nome_input"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginHorizontal="45dp"
+        android:layout_marginTop="25dp"/>
+
+    <EditText
+        android:id="@+id/new_list_description_input"
+        android:hint="Lista de exemplo"
+        android:inputType="textMultiLine"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:paddingHorizontal="10sp"
+        app:layout_constraintTop_toBottomOf="@id/new_list_description_info"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginHorizontal="35dp"/>
+
+    <Button
+        android:id="@+id/new_list_btn_save"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Adicionar"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/pink_100"
+        android:layout_marginTop="35dp"
+        android:layout_marginHorizontal="35dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/new_list_description_input"
+        />
+
+    <Button
+        android:id="@+id/new_list_btn_cancel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Cancelar"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/pink_200"
+        android:layout_marginHorizontal="35dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/new_list_btn_save"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
