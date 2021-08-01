@@ -31,9 +31,6 @@ public class NewListActivity extends AppCompatActivity {
         Button buttonCancel = findViewById(R.id.new_list_btn_cancel);
         EditText inputTitle = findViewById(R.id.new_list_nome_input);
         EditText inputDescription = findViewById(R.id.new_list_description_input);
-        CheckBox addToInspiration = findViewById(R.id.new_list_inspiration_checkbox);
-
-        addToInspiration.setVisibility(View.INVISIBLE);
 
         SharedPreferences sharedPreferences = getSharedPreferences("user", Context.MODE_PRIVATE);
 
@@ -45,8 +42,9 @@ public class NewListActivity extends AppCompatActivity {
                 } else if (inputDescription.getText().toString().length() == 0) {
                     Toast.makeText(NewListActivity.this, "Você precisa adicionar uma descrição", Toast.LENGTH_SHORT).show();
                 } else {
+                    ListModel lista = new ListModel(sharedPreferences.getString("id", ""), inputTitle.getText().toString(), inputDescription.getText().toString(), 0);
                     try {
-                        lists.add(new ListModel(sharedPreferences.getString("id", ""), inputTitle.getText().toString(), inputDescription.getText().toString(), 0));
+                        lists.add(lista);
                         Toast.makeText(NewListActivity.this, "Lista cadastrada", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(NewListActivity.this, MainActivity.class);
                         startActivity(intent);
@@ -55,7 +53,6 @@ public class NewListActivity extends AppCompatActivity {
                         Toast.makeText(NewListActivity.this, "Não foi possível salvar a lista", Toast.LENGTH_SHORT).show();
                     }
                 }
-
             }
         });
 
