@@ -194,9 +194,7 @@ public class ListaDeComprasActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(context, EditListActivity.class);
-                i.putExtra("LIST_NAME", name.getText());
-                i.putExtra("LIST_DESCRIPTION", description.getText());
-                i.putExtra("LIST_INSPIRATION", isInspiration);
+                i.putExtra("LIST_ID", listId);
                 startActivity(i);
             }
         });
