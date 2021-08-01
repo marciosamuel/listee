@@ -7,6 +7,10 @@ public class ListModel {
     private String subTitle;
     private int quantity;
 
+    public ListModel(){
+
+    }
+
     public ListModel(String user_id, String title, String subTitle, int quantity){
         this.user_id = user_id;
         this.title = title;
@@ -34,5 +38,21 @@ public class ListModel {
         return subTitle;
     }
 
-    public int getItensQuantity() { return  quantity; }
+    public int getQuantity() { return  quantity; }
+
+    public void setUser_id(String user_id) {
+        this.user_id = user_id;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setSubTitle(String subTitle) {
+        this.subTitle = subTitle;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
 }
